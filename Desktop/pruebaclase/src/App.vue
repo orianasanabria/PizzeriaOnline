@@ -6,11 +6,18 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import Nav from "./components/Nav.vue";
 export default {
   name: "App",
   components: {
     Nav,
+  },
+  methods: {
+    ...mapActions(["getData"]),
+  },
+  created() {
+    this.getData();
   },
 };
 </script>

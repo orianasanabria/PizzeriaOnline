@@ -2,13 +2,17 @@
   <div class="home">
     <div class="container">
       <div class="row">
-        <div class="col-12 mt-5">
+        <div class="col-12 mt-5 pt-5">
           <h1><em>Pizzería</em></h1>
         </div>
         <div class="col-12 mt-5">
           <div class="pizza-card">
             <div class="row">
-              <div v-for="pizza in pizzas" :key="pizza.name" class="col-4 mb-5">
+              <div
+                v-for="pizza in productosFiltrados"
+                :key="pizza.name"
+                class="col-4 mb-5"
+              >
                 <div class="card h-100">
                   <img :src="pizza.img" class="card-img-top" alt="" />
                   <div class="card-body">
@@ -34,17 +38,26 @@
                     </p>
 
                     <div class="row">
-                      <div class="col-6">
+                      <!-- <div class="col-6">
                         <input
                           v-model="cantidad"
                           class="w-100 h-100"
                           type="text"
                         />
-                      </div>
-                      <div class="col-6">
-                        <a href="#" class="btn btn-primary ms-3 w-75"
-                          >Agregar</a
+                      </div> -->
+                      <div class="col-12">
+                        <button
+                          @click="
+                            agregarPizza({
+                              id: pizza.id,
+                              nombre: pizza.name,
+                              precio: pizza.price,
+                            })
+                          "
+                          class="btn btn-success w-100"
                         >
+                          Agregar al carrito
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -59,28 +72,17 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "Home",
   data() {
-    return {
-      cantidad: "",
-    };
-  },
-  methods: {
-    ...mapActions(["getData"]),
+    return {};
   },
   computed: {
-    get: function () {
-      return "Algo";
-    },
-    set: function (v) {
-      return console.log(v);
-    },
-    ...mapState(["pizzas"]),
+    ...mapGetters(["productosFiltrados"]),
   },
-  created() {
-    this.getData();
+  methods: {
+    ...mapMutations(["agregarPizza"]),
   },
 };
 </script>

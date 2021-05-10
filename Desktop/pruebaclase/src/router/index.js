@@ -4,11 +4,30 @@ import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/carrito",
+    name: "Carrito",
+    component: () => import( /*webpackChunkName: "carrito*/ "../views/Carrito.vue"),
+  },
+  {
+    path: "/inventario",
+    name: "Inventario",
+    component: () => import( /*webpackChunkName: "inventario*/ "../views/Inventario.vue"),
+  },
+  {
+    path: "/ventas",
+    name: "Ventas",
+    component: () => import( /*webpackChunkName: "ventas*/ "../views/Ventas.vue"),
+  },
+  {
+    path: "*",
+    name: "NotFound",
+    component: () => import( /*webpackChunkName: "notfound*/ "../views/NotFound.vue"),
   },
   // {
   //   path: "/about",

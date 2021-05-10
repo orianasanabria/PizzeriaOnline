@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Pizzería</a>
+      <router-link class="navbar-brand" :to="{ name: 'Home' }"
+        >Pizzería</router-link
+      >
       <button
         class="navbar-toggler"
         type="button"
@@ -17,24 +19,44 @@
         <div class="navbar-nav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link class="nav-link" to="/">Inicio</router-link>
+              <router-link class="nav-link" :to="{ name: 'Home' }"
+                >Inicio</router-link
+              >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/">Inventario</router-link>
+              <router-link class="nav-link" :to="{ name: 'Inventario' }"
+                >Inventario</router-link
+              >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/">Ventas</router-link>
+              <router-link class="nav-link" :to="{ name: 'Carrito' }"
+                >Carrito</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{ name: 'Ventas' }"
+                >Ventas</router-link
+              >
             </li>
           </ul>
         </div>
       </div>
-      <div class="cart-icon"></div>
+      <li class="nav-item total">
+        <a class="text-light me-4">Total: ${{ totalCarrito }}</a>
+      </li>
+      <div @click="$router.push('/carrito')" class="cart-icon"></div>
     </div>
   </nav>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  name: "Nav",
+  computed: {
+    ...mapGetters(["totalCarrito"]),
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -42,11 +64,23 @@ export default {};
   width: 24px;
   height: 24px;
   line-height: 24px;
+  cursor: pointer;
   &::before {
     content: "shopping_cart";
     font-family: "Material Icons";
     font-size: 1.5rem;
     color: #fff;
+  }
+}
+nav {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+.total {
+  list-style-type: none;
+  a {
+    text-decoration: none;
   }
 }
 </style>
